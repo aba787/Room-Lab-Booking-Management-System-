@@ -1,15 +1,104 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام حجز القاعات والمعامل</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  Hello world
+  <header>
+    <h1>نظام حجز القاعات والمعامل</h1>
+    <p>جهة التدريب - إدارة الحجوزات</p>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- نموذج الحجز -->
+      <section class="booking-form">
+        <h2>حجز جديد</h2>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="roomType">نوع المكان:</label>
+            <select id="roomType" required>
+              <option value="">اختر النوع</option>
+              <option value="conference">قاعة اجتماعات</option>
+              <option value="training">قاعة تدريب</option>
+              <option value="lab">معمل حاسوب</option>
+              <option value="workshop">ورشة عمل</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="roomName">اسم القاعة/المعمل:</label>
+            <select id="roomName" required>
+              <option value="">اختر المكان</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bookerName">اسم المحجوز:</label>
+            <input type="text" id="bookerName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="department">القسم/الجهة:</label>
+            <input type="text" id="department" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bookingDate">تاريخ الحجز:</label>
+            <input type="date" id="bookingDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="startTime">وقت البداية:</label>
+            <input type="time" id="startTime" required>
+          </div>
+
+          <div class="form-group">
+            <label for="endTime">وقت النهاية:</label>
+            <input type="time" id="endTime" required>
+          </div>
+
+          <div class="form-group">
+            <label for="purpose">الغرض من الاستخدام:</label>
+            <textarea id="purpose" rows="3" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">تأكيد الحجز</button>
+        </form>
+      </section>
+
+      <!-- عرض الحجوزات -->
+      <section class="bookings-display">
+        <h2>الحجوزات الحالية</h2>
+        <div class="filter-section">
+          <label for="filterDate">تصفية حسب التاريخ:</label>
+          <input type="date" id="filterDate">
+          <button onclick="filterBookings()" class="btn-secondary">تصفية</button>
+          <button onclick="showAllBookings()" class="btn-secondary">عرض الكل</button>
+        </div>
+        <div id="bookingsList" class="bookings-list"></div>
+      </section>
+    </div>
+
+    <!-- رسالة التأكيد -->
+    <div id="confirmationModal" class="modal hidden">
+      <div class="modal-content">
+        <h3>تأكيد الحجز</h3>
+        <p id="confirmationMessage"></p>
+        <div class="modal-buttons">
+          <button onclick="closeModal()" class="btn-secondary">إغلاق</button>
+          <button onclick="printBooking()" class="btn-primary">طباعة الحجز</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
   <script src="script.js"></script>
 </body>
 
